@@ -15,3 +15,5 @@ export function AuthLayout() {
     </div>
   );
 }
+
+export default AuthLayout;

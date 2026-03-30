@@ -3,132 +3,58 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './ProtectedRoute';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 
-// Lazy-loaded layouts
-const AuthLayout = React.lazy(() =>
-  import('@/layouts/AuthLayout').then((m) => ({ default: m.AuthLayout }))
-);
-const AppLayout = React.lazy(() =>
-  import('@/layouts/AppLayout').then((m) => ({ default: m.AppLayout }))
-);
-const SettingsLayout = React.lazy(() =>
-  import('@/layouts/SettingsLayout').then((m) => ({ default: m.SettingsLayout }))
-);
+// Layouts
+const AuthLayout = React.lazy(() => import('@/layouts/AuthLayout'));
+const AppLayout = React.lazy(() => import('@/layouts/AppLayout'));
 
 // Auth pages
-const LoginPage = React.lazy(() =>
-  import('@/pages/auth/LoginPage').then((m) => ({ default: m.LoginPage }))
-);
-const ForgotPasswordPage = React.lazy(() =>
-  import('@/pages/auth/ForgotPasswordPage').then((m) => ({ default: m.ForgotPasswordPage }))
-);
-const ResetPasswordPage = React.lazy(() =>
-  import('@/pages/auth/ResetPasswordPage').then((m) => ({ default: m.ResetPasswordPage }))
-);
-const AcceptInvitePage = React.lazy(() =>
-  import('@/pages/auth/AcceptInvitePage').then((m) => ({ default: m.AcceptInvitePage }))
-);
+const LoginPage = React.lazy(() => import('@/pages/auth/LoginPage'));
+const ForgotPasswordPage = React.lazy(() => import('@/pages/auth/ForgotPasswordPage'));
+const ResetPasswordPage = React.lazy(() => import('@/pages/auth/ResetPasswordPage'));
+const AcceptInvitePage = React.lazy(() => import('@/pages/auth/AcceptInvitePage'));
 
 // Dashboard
-const DashboardPage = React.lazy(() =>
-  import('@/pages/dashboard/DashboardPage').then((m) => ({ default: m.DashboardPage }))
-);
+const DashboardPage = React.lazy(() => import('@/pages/dashboard/DashboardPage'));
 
-// Contacts
-const ContactsListPage = React.lazy(() =>
-  import('@/pages/contacts/ContactsListPage').then((m) => ({ default: m.ContactsListPage }))
-);
-const ContactDetailPage = React.lazy(() =>
-  import('@/pages/contacts/ContactDetailPage').then((m) => ({ default: m.ContactDetailPage }))
-);
-
-// Accounts
-const AccountsListPage = React.lazy(() =>
-  import('@/pages/accounts/AccountsListPage').then((m) => ({ default: m.AccountsListPage }))
-);
-const AccountDetailPage = React.lazy(() =>
-  import('@/pages/accounts/AccountDetailPage').then((m) => ({ default: m.AccountDetailPage }))
-);
+// CRM
+const ContactsListPage = React.lazy(() => import('@/pages/contacts/ContactsListPage'));
+const ContactDetailPage = React.lazy(() => import('@/pages/contacts/ContactDetailPage'));
+const AccountsListPage = React.lazy(() => import('@/pages/accounts/AccountsListPage'));
+const AccountDetailPage = React.lazy(() => import('@/pages/accounts/AccountDetailPage'));
 
 // Sales
-const LeadsListPage = React.lazy(() =>
-  import('@/pages/sales/LeadsListPage').then((m) => ({ default: m.LeadsListPage }))
-);
-const PipelinesPage = React.lazy(() =>
-  import('@/pages/sales/PipelinesPage').then((m) => ({ default: m.PipelinesPage }))
-);
-const OpportunitiesListPage = React.lazy(() =>
-  import('@/pages/sales/OpportunitiesListPage').then((m) => ({ default: m.OpportunitiesListPage }))
-);
-const QuotesListPage = React.lazy(() =>
-  import('@/pages/sales/QuotesListPage').then((m) => ({ default: m.QuotesListPage }))
-);
-const ActivitiesPage = React.lazy(() =>
-  import('@/pages/sales/ActivitiesPage').then((m) => ({ default: m.ActivitiesPage }))
-);
-const ForecastingPage = React.lazy(() =>
-  import('@/pages/sales/ForecastingPage').then((m) => ({ default: m.ForecastingPage }))
-);
+const LeadsListPage = React.lazy(() => import('@/pages/sales/leads/LeadsListPage'));
+const PipelinesPage = React.lazy(() => import('@/pages/sales/pipelines/PipelinesPage'));
+const OpportunitiesListPage = React.lazy(() => import('@/pages/sales/opportunities/OpportunitiesListPage'));
+const QuotesListPage = React.lazy(() => import('@/pages/sales/quotes/QuotesListPage'));
+const ActivitiesPage = React.lazy(() => import('@/pages/sales/activities/ActivitiesPage'));
+const ForecastingPage = React.lazy(() => import('@/pages/sales/forecasting/ForecastingPage'));
 
 // Marketing
-const CampaignsListPage = React.lazy(() =>
-  import('@/pages/marketing/CampaignsListPage').then((m) => ({ default: m.CampaignsListPage }))
-);
-const CampaignDetailPage = React.lazy(() =>
-  import('@/pages/marketing/CampaignDetailPage').then((m) => ({ default: m.CampaignDetailPage }))
-);
-const TemplatesListPage = React.lazy(() =>
-  import('@/pages/marketing/TemplatesListPage').then((m) => ({ default: m.TemplatesListPage }))
-);
-const SegmentsListPage = React.lazy(() =>
-  import('@/pages/marketing/SegmentsListPage').then((m) => ({ default: m.SegmentsListPage }))
-);
+const CampaignsListPage = React.lazy(() => import('@/pages/marketing/campaigns/CampaignsListPage'));
+const CampaignDetailPage = React.lazy(() => import('@/pages/marketing/campaigns/CampaignDetailPage'));
+const TemplatesListPage = React.lazy(() => import('@/pages/marketing/templates/TemplatesListPage'));
+const SegmentsListPage = React.lazy(() => import('@/pages/marketing/segments/SegmentsListPage'));
 
 // Support
-const TicketsListPage = React.lazy(() =>
-  import('@/pages/support/TicketsListPage').then((m) => ({ default: m.TicketsListPage }))
-);
-const TicketDetailPage = React.lazy(() =>
-  import('@/pages/support/TicketDetailPage').then((m) => ({ default: m.TicketDetailPage }))
-);
-const SLAPoliciesPage = React.lazy(() =>
-  import('@/pages/support/SLAPoliciesPage').then((m) => ({ default: m.SLAPoliciesPage }))
-);
-const KBDashboardPage = React.lazy(() =>
-  import('@/pages/support/KBDashboardPage').then((m) => ({ default: m.KBDashboardPage }))
-);
+const TicketsListPage = React.lazy(() => import('@/pages/support/tickets/TicketsListPage'));
+const TicketDetailPage = React.lazy(() => import('@/pages/support/tickets/TicketDetailPage'));
+const SLAPoliciesPage = React.lazy(() => import('@/pages/support/sla/SLAPoliciesPage'));
+const KBDashboardPage = React.lazy(() => import('@/pages/support/knowledge-base/KBDashboardPage'));
 
 // Finance
-const InvoicesListPage = React.lazy(() =>
-  import('@/pages/finance/InvoicesListPage').then((m) => ({ default: m.InvoicesListPage }))
-);
-const InvoiceDetailPage = React.lazy(() =>
-  import('@/pages/finance/InvoiceDetailPage').then((m) => ({ default: m.InvoiceDetailPage }))
-);
-const PaymentsListPage = React.lazy(() =>
-  import('@/pages/finance/PaymentsListPage').then((m) => ({ default: m.PaymentsListPage }))
-);
-const ContractsListPage = React.lazy(() =>
-  import('@/pages/finance/ContractsListPage').then((m) => ({ default: m.ContractsListPage }))
-);
-const FinancialReportsPage = React.lazy(() =>
-  import('@/pages/finance/FinancialReportsPage').then((m) => ({ default: m.FinancialReportsPage }))
-);
+const InvoicesListPage = React.lazy(() => import('@/pages/finance/invoices/InvoicesListPage'));
+const InvoiceDetailPage = React.lazy(() => import('@/pages/finance/invoices/InvoiceDetailPage'));
+const PaymentsListPage = React.lazy(() => import('@/pages/finance/payments/PaymentsListPage'));
+const ContractsListPage = React.lazy(() => import('@/pages/finance/contracts/ContractsListPage'));
+const FinancialReportsPage = React.lazy(() => import('@/pages/finance/reports/FinancialReportsPage'));
 
 // Settings
-const ProfileSettingsPage = React.lazy(() =>
-  import('@/pages/settings/ProfileSettingsPage').then((m) => ({ default: m.ProfileSettingsPage }))
-);
-const OrganizationSettingsPage = React.lazy(() =>
-  import('@/pages/settings/OrganizationSettingsPage').then((m) => ({
-    default: m.OrganizationSettingsPage,
-  }))
-);
-const UsersSettingsPage = React.lazy(() =>
-  import('@/pages/settings/UsersSettingsPage').then((m) => ({ default: m.UsersSettingsPage }))
-);
-const RolesSettingsPage = React.lazy(() =>
-  import('@/pages/settings/RolesSettingsPage').then((m) => ({ default: m.RolesSettingsPage }))
-);
+const SettingsLayout = React.lazy(() => import('@/pages/settings/SettingsLayout'));
+const ProfilePage = React.lazy(() => import('@/pages/settings/ProfilePage'));
+const OrganizationPage = React.lazy(() => import('@/pages/settings/OrganizationPage'));
+const UsersPage = React.lazy(() => import('@/pages/settings/UsersPage'));
+const RolesPage = React.lazy(() => import('@/pages/settings/RolesPage'));
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>;
@@ -137,11 +63,7 @@ function Lazy({ children }: { children: React.ReactNode }) {
 export const router = createBrowserRouter([
   // Public / auth routes
   {
-    element: (
-      <Lazy>
-        <AuthLayout />
-      </Lazy>
-    ),
+    element: <Lazy><AuthLayout /></Lazy>,
     children: [
       { path: '/login', element: <Lazy><LoginPage /></Lazy> },
       { path: '/forgot-password', element: <Lazy><ForgotPasswordPage /></Lazy> },
@@ -154,9 +76,7 @@ export const router = createBrowserRouter([
   {
     element: (
       <ProtectedRoute>
-        <Lazy>
-          <AppLayout />
-        </Lazy>
+        <Lazy><AppLayout /></Lazy>
       </ProtectedRoute>
     ),
     children: [
@@ -195,20 +115,16 @@ export const router = createBrowserRouter([
       { path: '/finance/contracts', element: <Lazy><ContractsListPage /></Lazy> },
       { path: '/finance/reports', element: <Lazy><FinancialReportsPage /></Lazy> },
 
-      // Settings (nested layout)
+      // Settings (nested)
       {
         path: '/settings',
-        element: (
-          <Lazy>
-            <SettingsLayout />
-          </Lazy>
-        ),
+        element: <Lazy><SettingsLayout /></Lazy>,
         children: [
           { index: true, element: <Navigate to="/settings/profile" replace /> },
-          { path: 'profile', element: <Lazy><ProfileSettingsPage /></Lazy> },
-          { path: 'organization', element: <Lazy><OrganizationSettingsPage /></Lazy> },
-          { path: 'users', element: <Lazy><UsersSettingsPage /></Lazy> },
-          { path: 'roles', element: <Lazy><RolesSettingsPage /></Lazy> },
+          { path: 'profile', element: <Lazy><ProfilePage /></Lazy> },
+          { path: 'organization', element: <Lazy><OrganizationPage /></Lazy> },
+          { path: 'users', element: <Lazy><UsersPage /></Lazy> },
+          { path: 'roles', element: <Lazy><RolesPage /></Lazy> },
         ],
       },
 
