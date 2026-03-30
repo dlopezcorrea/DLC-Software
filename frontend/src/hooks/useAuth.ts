@@ -3,7 +3,8 @@ import { login, logout } from '@/api/auth.api';
 import { useNavigate } from 'react-router-dom';
 
 export function useAuth() {
-  const { user, orgId, setAuth, clearAuth, isAuthenticated } = useAuthStore();
+  const { user, orgId, setAuth, clearAuth } = useAuthStore();
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
   const navigate = useNavigate();
 
   async function handleLogin(email: string, password: string) {
